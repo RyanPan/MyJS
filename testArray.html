@@ -1,29 +1,7 @@
 <html>
     <head>
         <title></title>
-        <script type="text/javascript">
-            function myconsole()
-            {
-
-            }
-
-            myconsole.log = function(msg)
-            {
-                var logdiv = document.createElement("div");
-                logdiv.style.border = "solid black 0px";
-                logdiv.style.color = "white";
-                logdiv.style.background = "black";
-                logdiv.style.padding = "10px";
-                logdiv.innerHTML = msg;
-                document.body.appendChild(logdiv);
-            }
-
-            if (document)
-            {
-                console = myconsole;
-            }
-        </script>
-        
+        <script src="https://raw.githubusercontent.com/RyanPan/MyJS/master/myconsole.js"></script>
     </head>
     <body>
 
