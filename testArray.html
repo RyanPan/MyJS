@@ -1,0 +1,31 @@
+<html>
+    <head>
+        <title></title>
+        <script type="text/javascript">
+        function Point(x, y)
+        {
+            this.x = x;
+            this.y = y;
+        }
+        var arr = [];
+        arr.push(new Point(0, 0));
+        arr.push(new Point(1, 1));
+
+        arr.dist = function(){
+            var point1 = this[0];
+            var point2 = this[1];
+
+            var x1 = point2.x - point1.x;
+            var y1 = point2.y - point1.y;
+
+            var l = Math.sqrt(x1 * x1 + y1 * y1);
+
+            console.log(l);
+        };
+        arr.dist();
+        </script>
+    </head>
+    <body>
+
+    </body>
+</html>
