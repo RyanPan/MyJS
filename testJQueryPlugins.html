@@ -1,0 +1,143 @@
+<html>
+    <head>
+        <style>
+            div
+            {
+                border: 2px solid red;
+                padding: 10px;
+                font-size: 48px;
+                width: 500px;
+                margin: 10px auto;
+            }
+            .test
+            {
+                padding: 20px;
+            }
+        </style>
+        <script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.2.1.js"></script>
+    </head>
+    <body>
+        <div>
+            Same text.
+        </div>
+        <div>
+            Same text.
+        </div>
+        <div>
+            <a href="Page1.html">Page1</a>
+            <br />
+            <a href="Page2.html">Page2</a>
+        </div>
+
+        <div id="myViewer"></div>
+
+        <div id="colorDiv" style="">Blue border and text</div>
+
+        <script type="text/javascript">
+            // plugin 1
+            $.fn.greenify = function(){
+                this.css("color", "green");
+                return this;
+            };
+            $("div").greenify().addClass("test");
+
+            // plugin 2
+            (function($){
+                $.fn.appendHref = function(options){
+                    var settings = $.extend({
+                        color: "Orange",
+                        width: 200
+                    }, options);
+                    return $("a").each(function(){
+                        var link = $(this);
+                        link.append( " [" + link.attr("href") + "]");
+                    });
+                };
+            })(jQuery);
+            var settings = { color: "Yellow" };
+            $("a").appendHref(settings);
+
+            // plugin 3
+            (function($){
+                $.fn.myImgViewer  = function(o)
+                {
+                    return this.each(function(){
+                        $(this).data('viewer', new $iv(this, o));
+                    });
+                };
+
+                $.myImgViewer = function(e, o){
+                    this.container = $(e);
+                    this.img_object = {};
+                    this.img_object.object = $("<img>");
+                    this.img_object.object.appendTo(this.container);
+                };
+
+                var $iv = $.myImgViewer;
+                
+            })(jQuery);
+            $("#myViewer").myImgViewer();
+
+            // plugin 4 & 5
+            (function($){
+                $.fn.blueBorder = function(){
+                    this.each(function(){
+                        $(this).css("border", "solid blue 2px");
+                    });
+                    return this;
+                };
+            })(jQuery);
+            (function($){
+                $.fn.blueText = function(){
+                    this.each(function(){
+                        $(this).css("color", "blue");
+                    });
+                    return this;
+                };
+            })(jQuery);
+            $("#colorDiv").blueBorder().blueText();
+
+            // pQuery
+            (function(){
+                var foo = function(arg){
+                    if (!(this instanceof foo))
+                    {
+                        return new foo(arg);
+                    }
+                    this.myArg = arg;
+                };
+
+                foo.fn = foo.prototype = {
+                    init: function(){}
+                };
+
+                window.foo = foo;
+            })();
+
+            foo.fn.myPlugin = function(){
+                alert(this.myArg);
+                return this;
+            };
+
+            foo("bar").myPlugin();
+
+            // a test
+            (function(){
+                function Person(name) {
+                    this.name = name;
+                };
+
+                Person.prototype.arr = [];
+                Person.prototype.a = "a";
+
+                var person1 = new Person("Peter");
+                var person2 = new Person("Ryan");
+
+                person1.arr.push(1);
+                person2.arr.push(2);
+
+                alert(person2.arr);
+            })();
+        </script>
+    </body>
+</html>
