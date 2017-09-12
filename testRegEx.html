@@ -1,0 +1,35 @@
+<html>
+    <head>
+        <title></title>
+        <script src="https://raw.githubusercontent.com/RyanPan/MyJS/master/myconsole.js"></script>
+    </head>
+    <body>
+        
+        <script type="text/javascript">
+        console.log("\"boy & girl\".replace(/(\\w+)\\s*&\\s*(\\w+)/g, \"$2 & $1\") => \"" + "boy & girl".replace(/(\w+)\s*&\s*(\w+)/g, "$2 & $1") + "\"");  // => girl & boy
+        console.log("\"boy girl\".replace(/\\w+/g, \"$&-$&\") => \"" + "boy girl".replace(/\w+/g, "$&-$&") + "\"");                                         // => boy-boy girl-girl
+        console.log("\"javascript\".replace(/script/, \"$& != $`\") => \"" + "javascript".replace(/script/, "$& != $`") + "\"");                            // => javascript != java
+        console.log("\"javascript\".replace(/java/, \"$& is $'\) => \"" + "javascript".replace(/java/, "$&$' is ") + "\"");                                 // => javascript is script
+
+        String.prototype.capitalize = function(){
+            return this.replace(/(^|\s)([a-z])/g, function(m, p1, p2) { return p1 + p2.toUpperCase(); });
+        };
+        console.log("\"i am a boy!\".capitalize() => \"" + "i am a boy!".capitalize() + "\"");
+
+        var s = "张三56分， 李四74分， 王五92分， 赵六84分";
+        var a = s.match(/\d+/g);
+        var sum = 0;
+        for (var i = 0; i < a.length; i++) {
+            sum += parseFloat(a[i]);
+        }
+        var avg = sum / a.length;
+        function f(){
+            var n = parseFloat(arguments[1]);
+            return n + "分" + "(" + ((n > avg) ? ("超出平均分" + (n - avg) + "分)"): ("低于平均分" + (avg - n)) + "分)");
+        }
+
+        var result = s.replace(/(\d+)分/g, f);
+        console.log("\"张三56分，李四74分，王五92分，赵六84分\"(显示平均分和分差) => \"" + result + "\"");
+        </script>
+    </body>
+</html>
