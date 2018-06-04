@@ -1,6 +1,5 @@
 @animationName: sk-circleFadeDelay;
 @rootSelector: sk-fading-circle;
-@childSelector: sk-circle;
 @childCount: 12;
 @circleTime: 1.2s;
 @sizeUnit: 10px;
@@ -16,7 +15,7 @@
     position: relative;
 }
 
-.@{rootSelector} .@{childSelector} {
+.@{rootSelector} div {
     width: 100%;
     height: 100%;
     position: absolute;
@@ -24,7 +23,7 @@
     top: 0;
 }
 
-.@{rootSelector} .@{childSelector}:before {
+.@{rootSelector} div:before {
     content: '';
     display: block;
     margin: 0 auto;
@@ -39,13 +38,13 @@
 .childLoop(@count, @deg: (@count - 1) * @degUnit, @dur: (@count - 1) * @circleDur - @circleTime) when (@count > 0){
     .childLoop(@count - 1);
 
-    .@{rootSelector} .sk-circle@{count} {
+    .@{rootSelector} div:nth-child(@{count}) {
         -webkit-transform: rotate(@deg);
         -ms-transform: rotate(@deg);
         transform: rotate(@deg);
     }
 
-    .@{rootSelector} .sk-circle@{count}:before {
+    .@{rootSelector} div:nth-child(@{count}):before {
         -webkit-animation-delay: @dur;
         animation-delay: @dur; 
     }
