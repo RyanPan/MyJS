@@ -1,0 +1,71 @@
+@animationName: sk-circleFadeDelay;
+@rootSelector: sk-fading-circle;
+@childSelector: sk-circle;
+@childCount: 12;
+@circleTime: 1.2s;
+@sizeUnit: 10px;
+
+@circleDur: @circleTime / @childCount;
+@size: @sizeUnit * @childCount / 3;
+@degUnit: 360deg / @childCount;
+
+.@{rootSelector} {
+    margin: 100px auto;
+    width: @size;
+    height: @size;
+    position: relative;
+}
+
+.@{rootSelector} .@{childSelector} {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    left: 0;
+    top: 0;
+}
+
+.@{rootSelector} .@{childSelector}:before {
+    content: '';
+    display: block;
+    margin: 0 auto;
+    width: 15%;
+    height: 15%;
+    background-color: #333;
+    border-radius: 100%;
+    -webkit-animation: @animationName @circleTime infinite ease-in-out both;
+    animation: @animationName @circleTime infinite ease-in-out both;
+}
+
+.childLoop(@count, @deg: (@count - 1) * @degUnit, @dur: (@count - 1) * @circleDur - @circleTime) when (@count > 0){
+    .childLoop(@count - 1);
+
+    .@{rootSelector} .sk-circle@{count} {
+        -webkit-transform: rotate(@deg);
+        -ms-transform: rotate(@deg);
+        transform: rotate(@deg);
+    }
+
+    .@{rootSelector} .sk-circle@{count}:before {
+        -webkit-animation-delay: @dur;
+        animation-delay: @dur; 
+    }
+}
+.childLoop(@childCount);
+
+@-webkit-keyframes @animationName {
+    0%, 39%, 100% {
+        opacity: 0;
+    }
+    40% {
+        opacity: 1;
+    }
+}
+
+@keyframes @animationName {
+    0%, 39%, 100% {
+        opacity: 0;
+    }
+    40% {
+        opacity: 1;
+    } 
+}
